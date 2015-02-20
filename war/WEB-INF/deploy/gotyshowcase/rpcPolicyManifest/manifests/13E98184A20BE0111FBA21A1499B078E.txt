@@ -1,0 +1,2 @@
+serviceClass: com.biftektech.gwt.goty.showcase.client.GreetingService
+path: 1C31C939AC84152911F383CDDB1FB92F.gwt.rpc

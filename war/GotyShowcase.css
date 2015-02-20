@@ -1,0 +1,10 @@
+/** Add css rules here for your application. */
+
+
+.gwt-Label {
+	font-size: 15px;
+}
+
+.row {
+	margin-top: 10px;
+}
