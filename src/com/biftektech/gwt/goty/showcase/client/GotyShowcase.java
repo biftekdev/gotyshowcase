@@ -15,12 +15,15 @@ import org.gwtbootstrap3.client.ui.constants.InputType;
 
 import com.biftektech.gwt.goty.shared.Goty;
 import com.biftektech.gwt.goty.shared.GotyProperties;
+import com.biftektech.gwt.goty.shared.NotificationButton;
 import com.biftektech.gwt.goty.shared.enm.AnimateCss;
+import com.biftektech.gwt.goty.shared.enm.ButtonType;
 import com.biftektech.gwt.goty.shared.enm.CloseWith;
 import com.biftektech.gwt.goty.shared.enm.Easing;
 import com.biftektech.gwt.goty.shared.enm.NotificationLayout;
 import com.biftektech.gwt.goty.shared.enm.NotificationTheme;
 import com.biftektech.gwt.goty.shared.enm.NotificationType;
+import com.biftektech.gwt.goty.shared.event.NotificationCallback;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.dom.client.Style.TextAlign;
@@ -115,6 +118,12 @@ public class GotyShowcase implements EntryPoint {
 		cbxTimeout.setValue(false, true);
 		rowTimeout.add(new Column(labelSize, cbxTimeout));
 		rowTimeout.add(new Column(inputSize, tbxTimeout));
+		
+		Row rowMultipleButton = new Row();
+		container.add(rowMultipleButton);
+		final CheckBox cbxMultipleButton = new CheckBox("Multiple Button");
+		cbxMultipleButton.setValue(false, true);
+		rowMultipleButton.add(new Column(labelSize, cbxMultipleButton));
 		
 		Row rowMaxVisible = new Row();
 		container.add(rowMaxVisible);
@@ -225,6 +234,31 @@ public class GotyShowcase implements EntryPoint {
 					gtp.addCloseWith(CloseWith.BACKDROP);
 				} else {
 					gtp.removeCloseWith(CloseWith.BACKDROP);
+				}
+				
+				if(cbxMultipleButton.getValue()) {
+					NotificationButton btnOk = NotificationButton.create(ButtonType.SUCCESS, "OK", new NotificationCallback() {
+						
+						@Override
+						public void call(Goty goty) {
+							Window.alert("Clicked OK!");
+						}
+					});
+					NotificationButton btnCancel = NotificationButton.create(ButtonType.DANGER, "Cancel", new NotificationCallback() {
+						
+						@Override
+						public void call(Goty goty) {
+							Window.alert("Clicked Cancel!");
+						}
+					});
+					NotificationButton btnClose = NotificationButton.create(ButtonType.WARNING, "Close", new NotificationCallback() {
+						
+						@Override
+						public void call(Goty goty) {
+							goty.close();
+						}
+					});
+					gtp.addButtons(new NotificationButton[]{btnOk, btnCancel, btnClose});
 				}
 				Goty gty = Goty.show(gtp);
 				
